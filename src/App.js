@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import TableComponent from './components/TableComponent';
+
+import data from './static/Wine-Data.json';
+import {
+  calculateStats,
+  parseFlavanoidData,
+  parseGammaData,
+} from './Utilities/utility';
 
 function App() {
+  const flavanoidData = parseFlavanoidData(data || []);
+  const updatedFlavanoidData = calculateStats(flavanoidData, 'Flavanoids');
+
+  const GammaData = parseGammaData(data || []);
+  const updatedGammaData = calculateStats(GammaData, 'gamma');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Data Visualisation Table</h1>
+      <TableComponent
+        columnData={updatedFlavanoidData}
+        tableHeading='Flavanoid'
+      />
+      <TableComponent
+        columnData={updatedGammaData}
+        tableHeading='Gamma'
+      />
     </div>
   );
 }
 
 export default App;
+
+

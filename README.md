@@ -1,8 +1,8 @@
 ## Data Visualisation
 This web app in ReactJS make use of Alochol beverages data in such a way that it gives back a meaningful data back in tabular format based upon the alcohol categories. 
 
-## WebPage View
-![Web Page View: Data Table](src/assets/images/tableImage.png)
+## Data Table Picture
+![Data Table picture](src/assets/images/dataTablePicture.png)
 
 ## Available Scripts
 In the project directory, you can run:

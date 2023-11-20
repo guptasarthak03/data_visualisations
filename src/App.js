@@ -1,12 +1,12 @@
 import React from 'react';
-import TableComponent from './components/TableComponent';
+import TableComponent from './components/Table';
+import data from './assets/data/Wine-Data.json';
 
-import data from './static/Wine-Data.json';
 import {
   calculateStats,
   parseFlavanoidData,
   parseGammaData,
-} from './Utilities/utility';
+} from './utils/utility';
 
 function App() {
   const flavanoidData = parseFlavanoidData(data || []);

@@ -1,9 +1,9 @@
 import React from 'react';
-import './TableComponent.css';
+import './styles.css';
+import TableRow from '../TableRow';
 
 const TableComponent = ({ columnData, tableHeading }) => {
   const columnList = Object.values(columnData); // transforming object into array based upon object value.
-  
   return (
     <div className='table-container'>
       <table className='data-table'>
@@ -16,24 +16,24 @@ const TableComponent = ({ columnData, tableHeading }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{tableHeading} Mean</td>
-            {columnList.map((item, index) => (
-              <td key={`${item.id}-mean`}>{item.mean}</td>
-            ))}
-          </tr>
-          <tr>
-            <td>{tableHeading} Median</td>
-            {columnList.map((item, index) => (
-              <td key={`${item.id}-median`}>{item.median}</td>
-            ))}
-          </tr>
-          <tr>
-            <td>{tableHeading} Mode</td>
-            {columnList.map((item, index) => (
-              <td key={`${item.id}-mode`}>{item.mode}</td>
-            ))}
-          </tr>
+          <TableRow
+            columnList={columnList}
+            rowName='mean'
+            rowHeading='Mean'
+            tableHeading={tableHeading}
+          />
+          <TableRow
+            columnList={columnList}
+            rowName='median'
+            rowHeading='Median'
+            tableHeading={tableHeading}
+          />
+          <TableRow
+            columnList={columnList}
+            rowName='mode'
+            rowHeading='Mode'
+            tableHeading={tableHeading}
+          />
         </tbody>
       </table>
     </div>

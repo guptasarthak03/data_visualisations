@@ -6,6 +6,14 @@ function generateUniqueId() {
 
 
 const calculateMean = (data, term) => {
+  if (data.length === 0) {
+    return null; // or any other value to indicate no data
+  }
+
+  if(!term){
+    throw new Error('Please provide property for operation')
+  }
+
   const sum = data.reduce((acc, item) => {
     return acc + Number(item[term]);
   }, 0);
@@ -14,18 +22,34 @@ const calculateMean = (data, term) => {
 };
 
 const calculateMedian = (data, term) => {
-  const sortedData = [...data].sort((a, b) => a - b);
-  const middle = Math.floor(sortedData.length / 2);
+  if (data.length === 0) {
+    return null; // or any other value to indicate no data
+  }
 
+  if(!term){
+    throw new Error('Please provide property for operation')
+  }
+
+  const sortedData = [...data].sort((a, b) => a[term] - b[term]);
+  const middle = Math.floor(sortedData.length / 2);
+  
   const result =
     sortedData.length % 2 === 0
-      ? (sortedData[middle - 1][term] + sortedData[middle][term]) / 2
-      : sortedData[middle][term];
+      ? (Number(sortedData[middle - 1][term]) + Number(sortedData[middle][term])) / 2
+      : Number(sortedData[middle][term]);
 
   return result.toFixed(3);
 };
 
 const calculateMode = (data, term) => {
+  if (data.length === 0) {
+    return null; // or any other value to indicate no data
+  }
+
+  if(!term){
+    throw new Error('Please provide property for operation')
+  }
+
   const counts = {};
   let mode;
   let maxCount = 0;
@@ -48,9 +72,9 @@ export const calculateStats = (data, term) => {
   const cloneData = structuredClone(data);
 
   for (let key in cloneData) {
-    const mean = calculateMean(cloneData[key].data, term);
-    const median = calculateMedian(cloneData[key].data, term);
-    const mode = calculateMode(cloneData[key].data, term);
+    const mean = calculateMean(cloneData[key]?.data, term);
+    const median = calculateMedian(cloneData[key]?.data, term);
+    const mode = calculateMode(cloneData[key]?.data, term);
 
     cloneData[key] = { ...cloneData[key], mean, median, mode };
   }
